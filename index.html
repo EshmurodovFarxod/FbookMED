@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="uz">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kitob narxi kalkulyatori</title>
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Kitob narxi kalkulyatori</title>
+<style>
     :root {
       --primary-color: #007acc;
       --hover-color: #005f99;
@@ -208,94 +209,171 @@ body.loaded { opacity: 1; }
   transform: scale(1.02);
 }
 
+
+.scrolling-text {
+  margin-top: 10px;
+  font-size: 18px;
+  font-style: italic;
+  white-space: nowrap;
+  overflow: hidden;
+  animation: scroll-left 10s linear 1;
+}
+
+.scrolling-text.telegram {
+  color: #ffe600;
+}
+
+@keyframes scroll-left {
+  0% { transform: translateX(100%); opacity: 1; }
+  100% { transform: translateX(-100%); opacity: 1; }
+  0% { transform: translateX(100%); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateX(-100%); opacity: 0; }
+}
+
+.scrolling-wrapper {
+  max-width: 100%;
+  overflow: hidden;
+  position: relative;
+  height: 32px;
+  margin-top: 10px;
+}
+
+.scrolling-text {
+  font-size: 18px;
+  font-style: italic;
+  white-space: nowrap;
+  display: inline-block;
+  animation: scroll-left 10s linear 1;
+  padding-left: 100%;
+}
+
+.scrolling-text.telegram {
+  color: #ffe600;
+}
+
+@keyframes scroll-left {
+  0% { transform: translateX(100%); opacity: 1; }
+  100% { transform: translateX(-100%); opacity: 1; }
+  0% { transform: translateX(0); opacity: 1; }
+  100% { transform: translateX(-100%); opacity: 1; }
+}
+
+.scrolling-wrapper {
+  max-width: 100%;
+  overflow: hidden;
+  position: relative;
+  height: 32px;
+  margin-top: 10px;
+}
+
+.scrolling-text {
+  font-size: 18px;
+  font-style: italic;
+  white-space: nowrap;
+  display: inline-block;
+  animation: scroll-left 10s linear 1;
+  padding-left: 100%;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+.scrolling-text.telegram {
+  color: #ffe600;
+}
+
+@keyframes scroll-left {
+  0% { transform: translateX(100%); opacity: 1; }
+  100% { transform: translateX(-100%); opacity: 1; }
+  0% { transform: translateX(0); opacity: 1; }
+  100% { transform: translateX(-100%); opacity: 1; }
+}
+
+/* Modal responsiveness */
+.modal-content {
+  max-height: 80vh;
+  overflow-y: auto;
+}
 </style>
 </head>
 <body onload="document.body.classList.add('loaded')">
-  <div class="banner">
-    <div class="banner-text">
-      <span>FbookMED</span>
-      <span class="sub">najot-ilmda</span>
-    </div>
-  </div>
-
-  <h2>KITOB NARXI KALKULATORI</h2>
-
-  <label for="tarif">Tarif:</label>
-  <button class='select-button' id='tarifBtn' onclick="showModal('tarif')">Tanlang</button>
-  <select id='tarif' style='display:none;' onchange='korsatmaChiqar()'>
-    <option value="" disabled selected>Tanlang</option>
-    <option>Standart</option>
-    <option>Optom</option>
-    <option>Maxsus</option>
-  </select>
-
-  <div id="izoh"></div>
-
-  <div class="row">
-    <div>
-      <label for="format">Format:</label>
-  <button class='select-button' id='formatBtn' onclick="showModal('format')">Tanlang</button>
-  <select id='format' style='display:none;'>
-        <option value="" disabled selected>Tanlang</option>
-        <option>A4</option>
-        <option>A5</option>
-        <option>B5</option>
-      </select>
-    </div>
-    <div>
-      <label for="muqova">Muqova:</label>
-  <button class='select-button' id='muqovaBtn' onclick="showModal('muqova')">Tanlang</button>
-  <select id='muqova' style='display:none;'>
-        <option value="" disabled selected>Tanlang</option>
-        <option>Qattiq muqovali</option>
-        <option>Yumshoq muqovali</option>
-        <option>Oddiy muqovali</option>
-        <option>Muqovasiz</option>
-      </select>
-    </div>
-  </div>
-
-  <div class="row">
-    <div>
-      <label for="rang">Rang:</label>
-  <button class='select-button' id='rangBtn' onclick="showModal('rang')">Tanlang</button>
-  <select id='rang' style='display:none;'>
-        <option value="" disabled selected>Tanlang</option>
-        <option>Oq qora</option>
-        <option>Rangli</option>
-      </select>
-    </div>
-    <div>
-      <label for="sahifa">Sahifa soni:</label>
-      <input type="number" id="sahifa" placeholder="Sahifa soni">
-    </div>
-  </div>
-
-  <div id="qogoz"></div>
-  <button onclick="hisoblaNarx()">Hisoblash</button>
-  <div id="natija"></div>
-
-  <footer>
-    <div class="brand">FbookMED</div>
-    <div class="contact-row">
-      <a href="tel:+998900152260" class="contact-banner">📞 +998900152260</a>
-      <a href="https://t.me/FbookMED" class="contact-banner" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg">FbookMED
+<div class="banner">
+<div class="banner-text">
+<span>FbookMED</span>
+<span class="sub">najot-ilmda</span>
+<div class="scrolling-wrapper"><div class="scrolling-text" id="scrollingText">Eng arzon va sifatli chop etish</div></div></div>
+</div>
+<h2>KITOB NARXI KALKULATORI</h2>
+<label for="tarif">Tarif:</label>
+<button aria-label="Tanlang" class="select-button" id="tarifBtn" onclick="showModal('tarif')" title="Tanlang">Tanlang</button>
+<select aria-label="Tanlov menyusi" id="tarif" onchange="korsatmaChiqar()" style="display:none;" title="Tanlov menyusi">
+<option disabled="" selected="" value="">Tanlang</option>
+<option>Standart</option>
+<option>Optom</option>
+<option>Maxsus</option>
+</select>
+<div id="izoh"></div>
+<div class="row">
+<div>
+<label for="format">Format:</label>
+<button aria-label="Tanlang" class="select-button" id="formatBtn" onclick="showModal('format')" title="Tanlang">Tanlang</button>
+<select aria-label="Tanlov menyusi" id="format" style="display:none;" title="Tanlov menyusi">
+<option disabled="" selected="" value="">Tanlang</option>
+<option>A4</option>
+<option>A5</option>
+<option>B5</option>
+</select>
+</div>
+<div>
+<label for="muqova">Muqova:</label>
+<button aria-label="Tanlang" class="select-button" id="muqovaBtn" onclick="showModal('muqova')" title="Tanlang">Tanlang</button>
+<select aria-label="Tanlov menyusi" id="muqova" style="display:none;" title="Tanlov menyusi">
+<option disabled="" selected="" value="">Tanlang</option>
+<option>Qattiq muqovali</option>
+<option>Yumshoq muqovali</option>
+<option>Oddiy muqovali</option>
+<option>Muqovasiz</option>
+</select>
+</div>
+</div>
+<div class="row">
+<div>
+<label for="rang">Rang:</label>
+<button aria-label="Tanlang" class="select-button" id="rangBtn" onclick="showModal('rang')" title="Tanlang">Tanlang</button>
+<select aria-label="Tanlov menyusi" id="rang" style="display:none;" title="Tanlov menyusi">
+<option disabled="" selected="" value="">Tanlang</option>
+<option>Oq qora</option>
+<option>Rangli</option>
+</select>
+</div>
+<div>
+<label for="sahifa">Sahifa soni:</label>
+<input id="sahifa" placeholder="Sahifa soni" type="number"/>
+</div>
+</div>
+<div id="qogoz"></div>
+<button aria-label="Hisoblash" onclick="hisoblaNarx()" title="Hisoblash">Hisoblash</button>
+<div id="natija"></div>
+<footer>
+<div class="brand">FbookMED</div>
+<div class="contact-row">
+<a class="contact-banner" href="tel:+998900152260">📞 +998900152260</a>
+<a class="contact-banner" href="https://t.me/FbookMED" target="_blank">
+<img alt="Telegram logotipi" src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg"/>FbookMED
       </a>
-      <a href="https://t.me/FbookMED1" class="contact-banner" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg">Admin
+<a class="contact-banner" href="https://t.me/FbookMED1" target="_blank">
+<img alt="Telegram logotipi" src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg"/>Admin
       </a>
-      <a href="https://youtube.com/@fbookmed?feature=shared" class="contact-banner" target="_blank">
-        <img src="https://repository-images.githubusercontent.com/324520492/ed8c1c80-47b4-11eb-8ddc-9b4ca1c3543d">YouTube
+<a class="contact-banner" href="https://youtube.com/@fbookmed?feature=shared" target="_blank">
+<img alt="GitHub banner rasmi" src="https://repository-images.githubusercontent.com/324520492/ed8c1c80-47b4-11eb-8ddc-9b4ca1c3543d"/>YouTube
       </a>
-
-      <a href="https://uzum.uz/ru/shop/fbookmed" class="contact-banner" target="_blank">
-        <img src="https://play-lh.googleusercontent.com/rHQT7QaBJoQJeE9Ela8HKB_E2geP4IZ-JLvfdnE87ycnaBIZjeyVhRAr6XUz6xf1FMlV">Uzum Market
+<a class="contact-banner" href="https://uzum.uz/ru/shop/fbookmed" target="_blank">
+<img alt="Google Play ilova rasmi" src="https://play-lh.googleusercontent.com/rHQT7QaBJoQJeE9Ela8HKB_E2geP4IZ-JLvfdnE87ycnaBIZjeyVhRAr6XUz6xf1FMlV"/>Uzum Market
       </a>
-    </div>
-  </footer>
-
-  <script>
+</div>
+</footer>
+<script>
     const tarifNarxlar = {
       "Standart": {
         "A4": { "Oq qora": 180, "Rangli": 220, muqova: {"Qattiq muqovali": 40000, "Yumshoq muqovali": 20000, "Oddiy muqovali": 5000, "Muqovasiz": 0} },
@@ -408,28 +486,61 @@ window.onclick = function(event) {
 }
 
 </script>
-
 <!-- Modal Dialogs -->
-<div id="tarifModal" class="modal"><div class="modal-content">
-  <button onclick="selectOption('tarif','Standart')">Standart</button>
-  <button onclick="selectOption('tarif','Optom')">Optom</button>
-  <button onclick="selectOption('tarif','Maxsus')">Maxsus</button>
+<div class="modal" id="tarifModal"><div class="modal-content">
+<button aria-label="Standart" onclick="selectOption('tarif','Standart')" title="Standart">Standart</button>
+<button aria-label="Optom" onclick="selectOption('tarif','Optom')" title="Optom">Optom</button>
+<button aria-label="Maxsus" onclick="selectOption('tarif','Maxsus')" title="Maxsus">Maxsus</button>
 </div></div>
-<div id="formatModal" class="modal"><div class="modal-content">
-  <button onclick="selectOption('format','A4')">A4</button>
-  <button onclick="selectOption('format','A5')">A5</button>
-  <button onclick="selectOption('format','B5')">B5</button>
+<div class="modal" id="formatModal"><div class="modal-content">
+<button aria-label="A4" onclick="selectOption('format','A4')" title="A4">A4</button>
+<button aria-label="A5" onclick="selectOption('format','A5')" title="A5">A5</button>
+<button aria-label="B5" onclick="selectOption('format','B5')" title="B5">B5</button>
 </div></div>
-<div id="muqovaModal" class="modal"><div class="modal-content">
-  <button onclick="selectOption('muqova','Qattiq muqovali')">Qattiq muqovali</button>
-  <button onclick="selectOption('muqova','Yumshoq muqovali')">Yumshoq muqovali</button>
-  <button onclick="selectOption('muqova','Oddiy muqovali')">Oddiy muqovali</button>
-  <button onclick="selectOption('muqova','Muqovasiz')">Muqovasiz</button>
+<div class="modal" id="muqovaModal"><div class="modal-content">
+<button aria-label="Qattiq muqovali" onclick="selectOption('muqova','Qattiq muqovali')" title="Qattiq muqovali">Qattiq muqovali</button>
+<button aria-label="Yumshoq muqovali" onclick="selectOption('muqova','Yumshoq muqovali')" title="Yumshoq muqovali">Yumshoq muqovali</button>
+<button aria-label="Oddiy muqovali" onclick="selectOption('muqova','Oddiy muqovali')" title="Oddiy muqovali">Oddiy muqovali</button>
+<button aria-label="Muqovasiz" onclick="selectOption('muqova','Muqovasiz')" title="Muqovasiz">Muqovasiz</button>
 </div></div>
-<div id="rangModal" class="modal"><div class="modal-content">
-  <button onclick="selectOption('rang','Oq qora')">Oq qora</button>
-  <button onclick="selectOption('rang','Rangli')">Rangli</button>
+<div class="modal" id="rangModal"><div class="modal-content">
+<button aria-label="Oq qora" onclick="selectOption('rang','Oq qora')" title="Oq qora">Oq qora</button>
+<button aria-label="Rangli" onclick="selectOption('rang','Rangli')" title="Rangli">Rangli</button>
 </div></div>
+<script>
+const messages = [
+  { text: "Eng arzon va sifatli chop etish", class: "", isLink: false },
+  { text: "Telegram orqali buyurtma bering", class: "telegram", isLink: true, href: "https://t.me/FbookMED1" }
+];
 
-</body>
+let msgIndex = 0;
+
+function rotateScrollingText() {
+  msgIndex = (msgIndex + 1) % messages.length;
+  const current = messages[msgIndex];
+  const oldElem = document.getElementById("scrollingText");
+  const newElem = document.createElement(current.isLink ? "a" : "div");
+
+  newElem.id = "scrollingText";
+  newElem.className = "scrolling-text " + (current.class || "");
+  newElem.textContent = current.text;
+
+  if (current.isLink) {
+    newElem.href = current.href;
+    newElem.target = "_blank";
+  }
+
+  oldElem.replaceWith(newElem);
+}
+
+setInterval(rotateScrollingText, 10000);
+</script><script>
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.modal').forEach(modal => {
+      modal.style.display = 'none';
+    });
+  }
+});
+</script></body>
 </html>
